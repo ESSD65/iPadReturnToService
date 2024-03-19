@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>d65.langec.return_to_service</string>       <!--Set a name relevant to your org-->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Path/To/python3</string>       <!--Enter your the path to your Python environment.  Commonly /usr/bin/python3-->
+        <string>/Path/To/main.py</string>      <!--Enter the path to the project's main-->
+    </array>
+    <key>StandardOutPath</key>
+    <string>/tmp/return_to_service.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/return_to_service_error.log</string>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>      <!--Configure the schedule-->
+            <key>Weekday</key>
+            <integer>1</integer>
+            <key>Hour</key>
+            <integer>2</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key>
+            <integer>2</integer>
+            <key>Hour</key>
+            <integer>2</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key>
+            <integer>3</integer>
+            <key>Hour</key>
+            <integer>2</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key>
+            <integer>4</integer>
+            <key>Hour</key>
+            <integer>2</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key>
+            <integer>5</integer>
+            <key>Hour</key>
+            <integer>2</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+    </array>
+</dict>
+</plist>
