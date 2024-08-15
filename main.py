@@ -94,8 +94,8 @@ if __name__ == '__main__':
                 }
             ]
         }
-        # request = requests.post(jamf_endpoint + "api/preview/mdm/commands", headers=headers, json=data)
-        # time.sleep(1)
+        request = requests.post(jamf_endpoint + "api/preview/mdm/commands", headers=headers, json=data)
+        time.sleep(1)
 
     # Save the current configuration since we reached this point without any errors.
     with open('config.json', 'w') as config_file:
