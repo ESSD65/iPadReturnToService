@@ -26,11 +26,11 @@ if __name__ == '__main__':
             except (json.decoder.JSONDecodeError, KeyError) as error:
                 print(f"Failed to parse json: {str(error)}")
 
-    if jamf_endpoint is None:
+    if jamf_endpoint is None or len(jamf_endpoint) == 0:
         jamf_endpoint = input("Please enter your jamf endpoint, i.e. https://casper.YOURDOMAIN.com:8443\n")
         json_config['jamf_endpoint'] = jamf_endpoint
 
-    if wifi_profile is None:
+    if wifi_profile is None or len(wifi_profile) == 0:
         file_path = input("Please enter the path to your wireless configuration profile:\n")
 
         with open(file_path, 'rb') as config_profile:
@@ -38,13 +38,13 @@ if __name__ == '__main__':
             wifi_profile = base64.b64encode(contents).decode('utf-8')
             json_config['wifi_profile'] = wifi_profile
 
-    if target_mobile_device_groups is None:
+    if target_mobile_device_groups is None or len(target_mobile_device_groups) == 0:
         target_groups = input("Please enter the ID(s) of the target mobile device groups, separated with comma if "
                               "there are multiple:\n")
         target_mobile_device_groups = target_groups.replace(' ', '').split(",")
         json_config['target_mobile_device_groups'] = target_mobile_device_groups
 
-    if wifi_profile is None:
+    if wifi_profile is None or len(wifi_profile) == 0:
         exit("Unable to read WiFi profile")
     if not jamf_endpoint[-1] == "/":
         jamf_endpoint += "/"
@@ -64,18 +64,20 @@ if __name__ == '__main__':
 
     for target_mobile_device_group in target_mobile_device_groups:
         print(f"Using target mobile device group: {target_mobile_device_group}")
-        group = requests.get(jamf_endpoint + f"JSSResource/mobiledevicegroups/id/{target_mobile_device_group}",
-                             headers=headers)
+        try:
+            group = requests.get(jamf_endpoint + f"JSSResource/mobiledevicegroups/id/{target_mobile_device_group}",
+                                 headers=headers)
 
-        mobile_devices = group.json().get('mobile_device_group').get('mobile_devices')
-        for mobile_device in mobile_devices:
-            device_id = mobile_device.get('id')
-            device_data = requests.get(jamf_endpoint + f"api/v2/mobile-devices/{device_id}", headers=headers)
-            device_json = device_data.json()
-            print("Adding device: " + device_json.get('name'))
-            target_devices.append(device_json.get('managementId'))
-            time.sleep(1)
-
+            mobile_devices = group.json().get('mobile_device_group').get('mobile_devices')
+            for mobile_device in mobile_devices:
+                device_id = mobile_device.get('id')
+                device_data = requests.get(jamf_endpoint + f"api/v2/mobile-devices/{device_id}", headers=headers)
+                device_json = device_data.json()
+                print("Adding device: " + device_json.get('name'))
+                target_devices.append(device_json.get('managementId'))
+                time.sleep(1)
+        except:
+            print("Failed to pull mobile device group")
     # eliminate duplicates
     target_devices = list(set(target_devices))
 
