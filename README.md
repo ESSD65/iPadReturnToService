@@ -3,7 +3,7 @@
 Installation:
 
 Requires Python 3.9+<br>
-Open a command prompt in the project folder and enter the command: ```pip install -r requirements.txt``` or ```python3 -m pip install -r requirements.txt``` if python is not on your PATH.
+Open a command prompt in the project folder and enter the command: <br>```pip install -r requirements.txt``` <br>or<br>```python3 -m pip install -r requirements.txt```<br>if python is not on your PATH.
 <hr>
 Configure LaunchAgent:
 
@@ -18,13 +18,13 @@ Fields to configure:
 </ol>
 <hr>
 Helpful gist for launch agents: https://gist.github.com/masklinn/a532dfe55bdeab3d60ab8e46ccc38a68
-Check the comments for help too.
+<br>Check the comments for help too.<br><br>
+You'll need to "bootstrap" the launchagent to add it as a recurring task:<br>
 
-You'll need to "bootstrap" the launchagent to add it as a recurring task:
 ```launchctl bootstrap gui/503 /PATH/TO/PLIST```
 
-You can launch it at any point by doing the "kickstart" command, where "LaunchAgentName" is the name you configured on the plist:
+You can launch it at any point by doing the "kickstart" command, where "LaunchAgentName" is the name you configured on the plist:<br>
 ```launchctl kickstart gui/503/LaunchAgentName```
 
-To terminate the recurring task, you'll use the "bootout" parameter:
+To terminate the recurring task, you'll use the "bootout" parameter:<br>
 ```launchctl bootout gui/503 /PATH/TO/PLIST```
