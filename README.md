@@ -3,7 +3,7 @@
 Installation:
 
 Requires Python 3.9+<br>
-Open a command prompt in the project folder and enter the command: ```pip install -r requirements.txt```
+Open a command prompt in the project folder and enter the command: ```pip install -r requirements.txt``` or ```python3 -m pip install -r requirements.txt``` if python is not on your PATH.
 <hr>
 Configure LaunchAgent:
 
